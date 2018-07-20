@@ -11,15 +11,16 @@ import br.com.sistemaswebbrasil.cursomc.domain.Pedido;
 import br.com.sistemaswebbrasil.cursomc.services.PedidoService;
 
 @RestController
-@RequestMapping(value="/pedidos")
+@RequestMapping(value = "/pedidos")
 public class PedidoResource {
+
 	@Autowired
 	PedidoService service;
-	
-	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Pedido obj = service.buscar(id);
-		
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Pedido> find(@PathVariable Integer id) {
+		Pedido obj = service.find(id);
+
 		return ResponseEntity.ok().body(obj);
 	}
 }
