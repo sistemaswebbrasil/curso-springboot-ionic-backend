@@ -19,13 +19,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produto implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String name;
+	private String nome;
 	private Double preco;
 
 	@JsonIgnore
@@ -40,10 +39,10 @@ public class Produto implements Serializable {
 	public Produto() {
 	}
 
-	public Produto(Integer id, String name, Double preco) {
+	public Produto(Integer id, String nome, Double preco) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.nome = nome;
 		this.preco = preco;
 	}
 
@@ -64,12 +63,12 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Double getPreco() {
