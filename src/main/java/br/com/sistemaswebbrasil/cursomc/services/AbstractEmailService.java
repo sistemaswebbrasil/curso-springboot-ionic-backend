@@ -16,16 +16,16 @@ import org.thymeleaf.context.Context;
 import br.com.sistemaswebbrasil.cursomc.domain.Pedido;
 
 public abstract class AbstractEmailService implements EmailService {
-
+	
 	@Value("${default.sender}")
 	private String sender;
-
+	
 	@Autowired
 	private TemplateEngine templateEngine;
-
+	
 	@Autowired
 	private JavaMailSender javaMailSender;
-
+	
 	@Override
 	public void sendOrderConfirmationEmail(Pedido obj) {
 		SimpleMailMessage sm = prepareSimpleMailMessageFromPedido(obj);
@@ -41,19 +41,20 @@ public abstract class AbstractEmailService implements EmailService {
 		sm.setText(obj.toString());
 		return sm;
 	}
-
+	
 	protected String htmlFromTemplatePedido(Pedido obj) {
 		Context context = new Context();
 		context.setVariable("pedido", obj);
 		return templateEngine.process("email/confirmacaoPedido", context);
 	}
-
+	
 	@Override
 	public void sendOrderConfirmationHtmlEmail(Pedido obj) {
 		try {
 			MimeMessage mm = prepareMimeMessageFromPedido(obj);
 			sendHtmlEmail(mm);
-		} catch (MessagingException e) {
+		}
+		catch (MessagingException e) {
 			sendOrderConfirmationEmail(obj);
 		}
 	}
@@ -68,5 +69,4 @@ public abstract class AbstractEmailService implements EmailService {
 		mmh.setText(htmlFromTemplatePedido(obj), true);
 		return mimeMessage;
 	}
-
 }
